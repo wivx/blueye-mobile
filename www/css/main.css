@@ -1,0 +1,144 @@
+
+		
+		#photo-btn {
+			position: absolute; bottom: 10px; right: 10px;
+		}
+
+		    .photo-canvas {
+                position: relative;
+			    display: block;
+                background: #fff url('../ban.png') no-repeat 50% 50%;
+            }
+        
+            .photo-image {
+			    width: 100%;
+                opacity: 0;
+                transform: translate3d(0,-10px,0);
+                transition: opacity 10s, transform 0.3s;
+            }
+            
+            .photo-focus {
+                position: absolute;																
+                border: 1px solid #fff;
+				z-index: 9999;
+                opacity: 0;
+                transform: translate3d(0,-10px,0);
+                transition: opacity 0.3s, transform 0.3s;
+            }
+            
+            .photo-focus-info {
+				
+                --focus-size: 50px;
+                --focus-full-size: 62px;
+                							
+                position: absolute;
+                left: 0;
+				top: calc(-1 * (var(--focus-full-size) + 8px));
+                width: var(--focus-size);
+                height: var(--focus-size);
+                box-shadow: -5px -5px 15px rgba(48,54,61,0.2);
+                border-radius: 3px;
+				z-index: 9999;
+                font-family: "Arial", "Verdana";
+                text-align: center;
+                
+                
+                font-size: 25px;
+                background-color: rgba(0, 0, 0, 0.5);
+                padding: 6px 6px 0 6px;
+                color: #eee;
+
+                opacity: 0;
+                /*
+                transform: translate3d(0,-10px,0);
+                transition: opacity 0.3s, transform 0.3s;
+                */
+                transform: perspective(100px) rotate3d(1,0,0,45deg);
+                transition: opacity 0.2s, transform 0.2s;
+            }
+            
+            .photo-focus-name {
+                text-align: center;
+                color: #fff;
+                background-color: rgba(0, 0, 0, 0.5);
+                position: absolute;
+                opacity: 0;
+            }
+            
+            .photo-focus-info img {
+                position: relative;
+                top: 6px;
+            }
+            
+            .photo-focus-info::after {
+                content: '';
+                top: 100%;
+                left: 50%;
+                border: solid transparent;
+                height: 0;
+                width: 0;
+                position: absolute;
+                pointer-events: none;
+                border-color: transparent;
+                border-top-color: rgba(0, 0, 0, 0.5);
+                border-width: 10px;
+                margin-left: -10px;
+            }
+            
+
+            
+            .photo-focus:hover .photo-focus-info {
+                opacity: 1;
+                -webkit-transform: scale(1);
+	            	-moz-transform: scale(1);
+	            	-o-transform: scale(1);
+	           	 -ms-transform: scale(1);
+	            	transform: scale(1);
+            }
+            
+            .show {
+                opacity: 1;
+                -webkit-transform: scale(1);
+	            -moz-transform: scale(1);
+	            -o-transform: scale(1);
+	            -ms-transform: scale(1);
+	            transform: scale(1);
+            }
+            
+            #loading_cover {
+                position: absolute;
+                left: 0;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                background: #3949ab;
+                z-index: 100000;
+                text-align: center;
+                padding-top: 8em;
+                color: #fff;
+                font-family: "Verdana";
+            }
+            
+            #loading_cover span.title {
+                font-size: 5em;
+                text-shadow: 0 0 12px #fff;
+            }
+            
+            #loading_cover span {
+                font-size: 2em;
+            }
+            
+            
+.fabSpeedDialdemoBasicUsage .text-capitalize {
+  text-transform: capitalize; }
+.fabSpeedDialdemoBasicUsage .md-fab:hover, .fabSpeedDialdemoBasicUsage .md-fab.md-focused {
+  background-color: #000 !important; }
+.fabSpeedDialdemoBasicUsage p.note {
+  font-size: 1.2rem; }
+.fabSpeedDialdemoBasicUsage .lock-size {
+  min-width: 300px;
+  min-height: 300px;
+  width: 300px;
+  height: 300px;
+  margin-left: auto;
+  margin-right: auto; }

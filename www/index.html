@@ -1,0 +1,130 @@
+<html lang="en">
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Angular Material style sheet -->
+	<link href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="./css/main.css" rel="stylesheet">
+
+</head>
+
+<body ng-app="blueyeMainPage" ng-cloak>
+	<div ng-controller="mainAppCtrl" layout="row" layout-wrap>
+
+		<!-- Header -->
+		<div flex="100">
+			<md-toolbar>
+				<div class="md-toolbar-tools">
+					<md-button class="md-icon-button" aria-label="Settings" ng-click="toggleLeft()">
+						<md-icon class="material-icons">menu</md-icon>
+					</md-button>
+					<h2><span>Face Detection</span></h2>
+				</div>
+			</md-toolbar>
+		</div>
+		
+		<!-- Loading Bar -->
+		<div class="loading-bar" style="width: 100%;">
+			<md-progress-linear md-mode="indeterminate"></md-progress-linear>
+			<div class="bottom-block">
+				<span>{{loadingMsg}}</span>
+			</div>
+		</div>
+		
+		<!-- Picture -->
+		<div flex="100">
+			<div class="photo-canvas">
+					<!-- the picture -->
+					<img class="photo-image" id="currentImage" src="" />
+					<!-- the focus frame -->
+					<div class="photo-focus" 
+						ng-click="cropPicture(people.x, people.y, people.width, people.height, people);" 
+						style="left: {{people.x/picture.width*100}}%; top: {{people.y/picture.height*100}}%; width: {{people.width/picture.width*100}}%; height: {{people.height/picture.height*100}}%;" ng-repeat="people in peopleData">
+						<div ng-show="isEnableWatson" class="photo-focus-info" style="left: calc( -1 * ( ( 62px - 100% ) / 2) );">
+							<img width="15" src="./{{people.gender}}.png" />
+							<span>{{people.age}}</span>
+						</div>
+						<div ng-show="isEnableWatson" class="photo-focus-name" style="width: {{people.width/picture.width*100}}%; top: 100%;">
+							{{people.name}}
+						</div>
+					</div>
+			</div>
+			
+			<section layout="row" layout-align="center center" layout-wrap>
+				<md-button ng-click="loadImage('alchemyvision');" class="md-primary md-raised md-button md-ink-ripple">IBM Watson API</md-button>
+				<md-button ng-click="loadImage('opencv');" class="md-raised md-button md-ink-ripple">OpenCV</md-button>
+				
+			</section>
+			
+			<md-card ng-hide="(currentPeople==null)">
+				<md-card-title>
+					<md-card-title-text>
+						<span class="md-headline">{{currentPeople.name}}</span>
+						<span class="md-subhead">
+							<strong>Profile</strong>
+							Age: {{currentPeople.age.ageRange}} ({{currentPeople.age.score}})
+							Gender: {{currentPeople.gender.gender}} ({{currentPeople.gender.score}})
+							{{currentPeople.candidate}}
+						</span>
+					</md-card-title-text>
+					<md-card-title-media>
+						<canvas id="myCanvas"></canvas>
+					</md-card-title-media>
+				</md-card-title>
+				<md-card-actions layout="row" layout-align="end center">
+					<md-button>Identify</md-button>
+				</md-card-actions>
+			</md-card>
+			
+			
+		</div>
+
+		<!-- Function Button -->
+		<md-button style="display: none;" id="photo-btn" class="md-fab" aria-label="Take a Picture" ng-click="takeNewPicture('alchemyvision')">
+			<md-icon class="material-icons">photo_camera</md-icon>
+		</md-button>
+		
+
+		<!-- Function dial Button -->
+		<md-fab-speed-dial id="photo-btn" md-open="false" md-direction="up" class="md-fling">
+			<md-fab-trigger>
+				<md-button aria-label="menu" class="md-fab md-warn">
+					<md-icon class="material-icons">menu</md-icon>
+				</md-button>
+			</md-fab-trigger>
+			<md-fab-actions>
+				<md-button aria-label="camera" class="md-fab md-raised md-mini" ng-click="takeNewPicture('alchemyvision');">
+					<md-icon class="material-icons">photo_camera</md-icon>
+					<!-- <md-tooltip md-direction="left" md-visible="hovered" md-autohide="true">Camera</md-tooltip> -->
+				</md-button>
+				<md-button aria-label="album" class="md-fab md-raised md-mini" ng-click="takeNewPicture('alchemyvision','album');">
+					<md-icon class="material-icons">photo_album</md-icon>
+					<!-- <md-tooltip md-direction="left" md-visible="hovered" md-autohide="true">Album</md-tooltip> -->
+				</md-button>
+			</md-fab-actions>
+		</md-fab-speed-dial>
+		
+	</div>
+	
+	<div id="loading_cover"><span class="title">BluEye</span><br /><br /><span><small>Powered by IBM Watson</small></span></div>
+
+	<!-- Angular Material requires Angular.js Libraries -->
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
+	<!-- Angular Material Library -->
+	<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
+	<!-- Cordova Libraries -->
+	<script src="cordova.js"></script>
+	<!-- jQuery Libraries -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<!-- BluEye Functions -->
+	<script src="./js/main.js"></script>
+
+	
+
+</body>
+
+</html>
